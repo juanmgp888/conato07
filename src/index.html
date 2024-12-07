@@ -3,13 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conato05 - jQuery</title>
+    <title>Conato07 - jQuery</title>
     <script src="../node_modules/jquery/dist/jquery.js"></script> 
 </head>
 <body>
-    <h1>Un ejemplo<h1>
-        <h3>subapartado cabecera h3 </h3>
+
+    <h1>Maestro</h1>
+    <ul id="maestro">
+    </ul>
+
+    <div id="detalle" hidden>
+        <h2>Detalle</h2>
+        <form>
+            <input type="hidden" id="id" name="id">
+            <label for="nombre">Nombre: </label>
+            <input type="text" id="nombre" name="nombre">
+            <label for="apellido">Apellido: </label>
+            <input type="text" id="apellido" name="apellido">
+            <label for="articulo">Articulo: </label>
+            <input type="text" id="articulo" name="articulo">
+        </form>
+    </div>
 
     <script src="./javascript/index.js"></script>
+
 </body>
 </html>
