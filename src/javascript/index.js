@@ -1,11 +1,9 @@
-
 $(document).ready(function() {
-    // creación de un arreglo
+    // Creación de un arreglo de solicitudes
     let solicitudes = [{
         "id": 1, 
         "nombre": "Juan",
-        "apellido": "García",
-        articulos_cli : [1,3]
+        "apellido": "García"
     }, {
         "id": 2, 
         "nombre": "Antonio",
@@ -16,67 +14,51 @@ $(document).ready(function() {
         "apellido": "Martínez"
     }];
 
-    let articulos = [{
-        "art_num": 1,
-        "art_nombre": "pijama XL",
-        "art_precio": 25.50
-    },{
-        "art_num": 2,
-        "art_nombre": "balón rugby",
-        "art_precio": 45
-        } , {
-        "art_num": 3,
-        "art_nombre": "pilas AA",
-        "art_precio": 5
-    }]
-
-    // recorrer arreglo con ciclo for y método append
-    for (i = 0 ; i < solicitudes.length; i++ ) {
+    // Recorrer arreglo 'solicitudes' con ciclo for y método append
+    for (let i = 0; i < solicitudes.length; i++) {
         $("#maestro").append(
-            $("<li>")  // atributos a aplicar a la etiqueta <li>
-                .text(solicitudes[i].nombre + ' ' + solicitudes[i].apellido)
-                .val(solicitudes[i])    // Más usado en select e input que con li
-                .attr("id", "id" + solicitudes[i].id)   
+            $("<li>")  // Atributos a aplicar a la etiqueta <li>
+                .text(solicitudes[i].nombre + ' ' + solicitudes[i].apellido) // Concatena nombre y apellidos y los pone en el atributo texto del elemento <li>
+                .attr("id", "id" + solicitudes[i].id)  // Asignar al atributo id de <li> una cadena "id"+el id del elemento del array. id1, id2...
+                .data("solicitud", solicitudes[i])    // Guardar los datos completos de la solicitud en el <li> ** DATA **
         );
     }
 
-
-    // Programar el event click sobre un elemento de la lista <li>
-    $("li").on("click", function(event) {
+    // Programar el evento click sobre un elemento de la lista <li>
+    $("li").on("click", function() {
         // Cambiar el estado de visibilidad de la sección 'Detalle'
         if ($("#detalle").is(':visible')) {
             $("#detalle").hide();
         } else {
             $("#detalle").show();
-        
-        
-            let solicitud = $(this).attr("id"); // toma el valor del atributo id del elemento <li>
+                
+            // Obtener los datos de la solicitud desde el atributo DATA. Guardados al generar la lista.
+            let solicitud = $(this).data("solicitud");
 
-            $("#id").val(solicitud);    // le da a valor/value del elemento con id="id" el valor de id
-            $("#nombre").val(solicitudes[solicitud].nombre);
-            $("#apellido").val("--- " + solicitud);    
-            $("#articulo").val(solicitudes[solicitud].articulo);        
+            // Llenar los campos con la información de la solicitud
+        //    $("#nombre").css("font-family", "Georgia, serif"); // No va
+        //    $("#nombre").css("font-family", "'FreeSans Oblique', serif"); // No va
+
+            $("#id").val(solicitud.id);    
+            $("#nombre").val(solicitud.nombre);
+            $("#apellido").val(solicitud.apellido);    
+
+            // 'val()' para elementos de form, select, input
+            // 'text()' para span,li, div
         }
-        
-    })
+    });
 
-
-    alRecorrerMaestro(function()
-    {
-        $(this).css("background-color", "lightblue");
-    })
-    $("li").on("click",alRecorrerMaestro)
-
+    // Cambio de color de fondo al pasar el mouse sobre los <li>
     $("li").hover(
         function() {
             // Mouse enter (cuando el ratón pasa sobre el <li>)
-            $(this).css("background-color", "lightblue");
+            $(this).css("background-color", "lightgray");
         }, 
         function() {
             // Mouse leave (cuando el ratón deja el <li>)
-            $(this).css("background-color", "lightgray");
+            $(this).css("background-color", "white");
         }
     );
-console.log('probando console.log');
 
+    console.log('probando console.log');
 });
